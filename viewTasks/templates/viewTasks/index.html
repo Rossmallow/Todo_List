@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Add a Task</h1>
+    <form id=add-task action="/addTask/" method="POST">
+        {% csrf_token %}
+        <label>Title</label><br>
+        <input type="text" name="title" placeholder="Title" /><br>
+        <label>Comment</label><br>
+        <textarea name="comment" placeholder="Comment"></textarea><br>
+        <label>Due Date</label><br>
+        <input type="date" name="due_date" placeholder="Due Date (yyyy-mm-dd)" />
+        <br>
+        <lable>Star</lable>
+        <input type="checkbox" name="star"><br>
+        <input type="submit" value="Add" />
+    </form>
+
+    <h1>View Tasks</h1>
+    {% if all_items %}
+    <ul>
+        {% for item in all_items %}
+        <li>{{ item.star }} | {{ item.title }} | {{ item.comment }} | {{ item.due_date }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You don't have any tasks</p>
+    {% endif %}
+</body>
+
+</html>
